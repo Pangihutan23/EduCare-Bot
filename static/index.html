@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=device-width, initial-scale=device-width, initial-scale=1.0">
+    <title>Sistem Pakar Pendamping Belajar — Room Chat</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Asisten Belajar</h2>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <button class="menu-item active" data-target="panel-chat" id="btn-menu-chat">
+                    <i class="fa-solid fa-comments"></i>
+                    <span>Room Chat</span>
+                </button>
+                <button class="menu-item" data-target="panel-tasks" id="btn-menu-tasks">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>Papan Tugas</span>
+                    <span class="badge" id="task-badge">0</span>
+                </button>
+                <button class="menu-item" data-target="panel-help" id="btn-menu-help">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Panduan & Info</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </div>
+                <div class="user-info">
+                    <h4>Mahasiswa</h4>
+                    <span id="user-session-id">ID: 000000</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Panel 1: Chat Room (Default) -->
+            <section id="panel-chat" class="content-panel active">
+                <header class="panel-header">
+                    <div class="header-info">
+                        <h3>💬 Ruang Obrolan Pendamping Belajar</h3>
+                        <p>Konsultasi sistem pakar kesulitan belajar dan asisten tugas kuliah</p>
+                    </div>
+                    <div class="header-actions">
+                        <button id="btn-clear-chat" title="Bersihkan Percakapan">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="chat-viewport">
+                    <div class="chat-messages" id="chat-messages-container">
+                        <!-- Chat bubbles will be rendered here dynamically -->
+                    </div>
+                    
+                    <!-- Inline Buttons (Simulates Telegram Keyboards) -->
+                    <div class="inline-buttons-container" id="chat-inline-buttons">
+                        <!-- Buttons will be rendered here -->
+                    </div>
+                    
+                    <div class="typing-indicator" id="chat-typing-indicator">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <span>Bot sedang berpikir...</span>
+                    </div>
+                </div>
+
+                <div class="chat-input-area">
+                    <button class="chat-action-btn cancel-btn" id="btn-chat-batal" title="Batal Alur">
+                        <i class="fa-solid fa-ban"></i> Batal
+                    </button>
+                    <div class="input-wrapper">
+                        <input type="text" id="chat-input-field" placeholder="Ketik curhatan Anda di sini (min. 5 kata untuk diagnosa instan)..." autocomplete="off">
+                        <button id="btn-chat-send" class="send-btn">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Panel 2: Task Board -->
+            <section id="panel-tasks" class="content-panel">
+                <header class="panel-header">
+                    <div class="header-info">
+                        <h3>📋 Papan Tugas Kuliah</h3>
+                        <p>Daftar tugas terstruktur dengan status peringatan tenggat waktu</p>
+                    </div>
+                    <div class="header-actions">
+                        <button id="btn-toggle-task-form" class="primary-btn">
+                            <i class="fa-solid fa-plus"></i> Tambah Tugas
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Hidden Slide-down Task Form -->
+                <div class="task-form-card" id="task-form-container">
+                    <div class="card-header">
+                        <h4>➕ Formulir Tambah Tugas</h4>
+                        <button id="btn-close-task-form"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <form id="add-task-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="form-task-name">Nama Tugas <span class="required">*</span></label>
+                                <input type="text" id="form-task-name" placeholder="Misal: Laporan Praktikum Kimia" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="form-task-course">Mata Kuliah <span class="required">*</span></label>
+                                <input type="text" id="form-task-course" placeholder="Misal: Kimia Dasar" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="form-task-deadline">Tanggal Tenggat (DD/MM/YYYY) <span class="required">*</span></label>
+                                <input type="text" id="form-task-deadline" placeholder="Format: DD/MM/YYYY (contoh: 25/05/2026)" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="form-task-notes">Catatan Tambahan</label>
+                                <input type="text" id="form-task-notes" placeholder="Catatan tambahan (opsional)">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" id="btn-cancel-task-form" class="secondary-btn">Batal</button>
+                            <button type="submit" class="primary-btn">Simpan Tugas</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="tasks-board-viewport">
+                    <div class="tasks-summary">
+                        <div class="summary-card stat-total">
+                            <span class="num" id="stat-total-val">0</span>
+                            <span class="label">Total Tugas</span>
+                        </div>
+                        <div class="summary-card stat-alert">
+                            <span class="num text-red" id="stat-alert-val">0</span>
+                            <span class="label">Mepet/Lewat</span>
+                        </div>
+                        <div class="summary-card stat-warning">
+                            <span class="num text-yellow" id="stat-warning-val">0</span>
+                            <span class="label">Mendekati</span>
+                        </div>
+                        <div class="summary-card stat-safe">
+                            <span class="num text-green" id="stat-safe-val">0</span>
+                            <span class="label">Aman</span>
+                        </div>
+                    </div>
+
+                    <div class="tasks-grid" id="tasks-cards-grid">
+                        <!-- Task cards will be rendered here dynamically -->
+                        <div class="empty-state" id="tasks-empty-state">
+                            <i class="fa-regular fa-folder-open"></i>
+                            <p>Tidak ada tugas yang terdaftar.</p>
+                            <span>Gunakan formulir atau ketik di obrolan untuk menambah tugas baru!</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Panel 3: Help & Info -->
+            <section id="panel-help" class="content-panel">
+                <header class="panel-header">
+                    <div class="header-info">
+                        <h3>ℹ️ Informasi Sistem & Panduan</h3>
+                        <p>Bagaimana Sistem Pakar bekerja dalam membantu kesulitan belajarmu</p>
+                    </div>
+                </header>
+
+                <div class="help-viewport">
+                    <div class="help-grid">
+                        <div class="help-card card-glass">
+                            <h4>🧠 Sistem Inferensi Kata Kunci</h4>
+                            <p>Sistem ini menggunakan metode pencocokan kata kunci (keyword matching) dengan pembobotan berlapis dari curhatan Anda:</p>
+                            <ul>
+                                <li><strong>Bobot Utama (+4 Poin):</strong> Kata-kata mendasar yang menunjukkan kategori masalah (misal: <em>tunda, mager, cemas, capek, hp, sosmed, bingung, materi</em>).</li>
+                                <li><strong>Bobot Kuat (+2 Poin):</strong> Kata pendukung tingkat keparahan (misal: <em>numpuk, lelah, game, sulit, paham</em>).</li>
+                                <li><strong>Bobot Pendukung (+1 Poin):</strong> Kata konteks tambahan (misal: <em>tugas, malas, stres, fokus, lupa, dosen</em>).</li>
+                            </ul>
+                        </div>
+
+                        <div class="help-card card-glass">
+                            <h4>🔗 Aturan Kombinasi (IF-THEN Rules)</h4>
+                            <p>Sistem memiliki 18 aturan logika kombinasi untuk mendeteksi korelasi kompleks antar gejala:</p>
+                            <ul>
+                                <li><strong>Kategori Prokrastinasi:</strong> Dipicu jika ada kombinasi menunda pekerjaan akademik yang disertai rasa malas/mager.</li>
+                                <li><strong>Kategori Burnout:</strong> Dipicu jika terdeteksi rasa lelah berlebih, stres, dan kelelahan mental dari tugas yang menumpuk.</li>
+                                <li><strong>Kategori Distraksi:</strong> Dipicu jika fokus teralihkan akibat gadget, game, media sosial, atau lingkungan.</li>
+                                <li><strong>Kategori Kurang Paham:</strong> Dipicu jika ada kebingungan mendalam, kesulitan memahami materi, atau ketidakjelasan penjelasan dosen.</li>
+                            </ul>
+                        </div>
+
+                        <div class="help-card card-glass">
+                            <h4>🛡️ Deteksi Negasi & Normalisasi Slang</h4>
+                            <p>Untuk meningkatkan tingkat akurasi diagnosis:</p>
+                            <ul>
+                                <li><strong>Normalisasi Slang:</strong> Mengubah 200+ kata tidak baku, slang, atau typo menjadi kata baku (misal: <em>mager</em> → <em>malas gerak</em>, <em>bgt</em> → <em>banget</em>, <em>laprak</em> → <em>laporan praktikum</em>).</li>
+                                <li><strong>Deteksi Negasi:</strong> Kalimat yang mengandung sangkalan (seperti <em>"tidak mager"</em> atau <em>"jarang buka hp"</em>) tidak akan dihitung poinnya karena sistem mendeteksi kata negasi sebelum kata kunci.</li>
+                            </ul>
+                        </div>
+
+                        <div class="help-card card-glass">
+                            <h4>🔔 Notifikasi Pengingat Otomatis</h4>
+                            <p>Setiap tugas yang Anda catat akan dipantau oleh scheduler di backend:</p>
+                            <ul>
+                                <li><strong>Pengingat H-3:</strong> Notifikasi awal untuk mulai mencicil tugas.</li>
+                                <li><strong>Pengingat H-1:</strong> Notifikasi peringatan keras H-1 pengumpulan.</li>
+                                <li><strong>Pengingat H-0:</strong> Peringatan darurat di hari tenggat pengumpulan.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container-element"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
