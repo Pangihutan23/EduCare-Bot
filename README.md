@@ -22,27 +22,21 @@ Aplikasi berbasis Python untuk diagnosa kesulitan belajar dan manajemen tugas. P
 └── README.md              # Dokumentasi ini
 ```
 
-## ⚙️ Cara Instalasi & Menjalankan
+## ⚙️ Cara Instalasi & Menjalankan   
 
-1. Pastikan berada di folder proyek:
-
-```bash
-cd "d:\kuliah\semester 6\SP\Chat Bot\EduCare-Bot"
-```
-
-2. Install dependency:
+1. Install dependency:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Jalankan backend:
+2. Jalankan backend:
 
 ```bash
 python app.py
 ```
 
-4. Buka browser atau client yang terhubung ke API untuk menggunakan aplikasi.
+3. Buka browser atau client yang terhubung ke API untuk menggunakan aplikasi.
 
 ## � Alur Kerja Aplikasi
 
