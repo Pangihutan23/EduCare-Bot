@@ -2,12 +2,23 @@
   "12345678": [],
   "99327405": [
     {
-      "id": "462f6825",
-      "nama_tugas": "laporan praktikum",
-      "mata_kuliah": "praktikum digital",
-      "deadline": "03/06/2026",
-      "catatan": "kerjakan bab 1-3",
-      "dibuat": "03/06/2026 09:17",
+      "id": "57c30ccd",
+      "nama_tugas": "laporan",
+      "mata_kuliah": "digital",
+      "deadline": "05/06/2026",
+      "catatan": "none",
+      "dibuat": "04/06/2026 11:26",
+      "sudah_diingatkan": [
+        "H-1"
+      ]
+    },
+    {
+      "id": "d643491f",
+      "nama_tugas": "diskusi",
+      "mata_kuliah": "praktikum",
+      "deadline": "10/06/2026",
+      "catatan": "none",
+      "dibuat": "04/06/2026 11:27",
       "sudah_diingatkan": []
     }
   ]

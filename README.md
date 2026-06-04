@@ -1,92 +1,68 @@
-# 🤖 Bot Sistem Pakar — Diagnosa Kesulitan Belajar Mahasiswa
+# 🤖 EduCare-Bot — Sistem Pakar Pendamping Belajar
 
-Bot Telegram yang menggunakan metode **Sistem Pakar** dengan teknik **Keyword Matching (Pembobotan Kata Kunci)** untuk mendiagnosis kesulitan belajar yang dialami mahasiswa.
+Aplikasi berbasis Python untuk diagnosa kesulitan belajar dan manajemen tugas. Proyek ini berjalan sebagai web backend menggunakan `app.py`.
 
-## 📋 Kategori Diagnosis
+## 🚀 Fitur Utama
 
-| # | Kategori | Deskripsi |
-|---|----------|-----------|
-| 1 | **Prokrastinasi** | Kebiasaan menunda-nunda tugas |
-| 2 | **Burnout** | Kelelahan akademik secara fisik & mental |
-| 3 | **Distraksi** | Kurang fokus akibat gadget/lingkungan |
-| 4 | **Kurang Pemahaman Dasar** | Tidak menguasai konsep/materi dasar |
+- Diagnosa masalah belajar berbasis keyword matching
+- Manajemen tugas dengan penyimpanan JSON (`tasks.json`)
+- Reminder deadline otomatis melalui scheduler
+- API backend yang dapat digunakan untuk antarmuka web atau client lain
 
 ## 🗂️ Struktur File
 
 ```
-├── bot.py                 # File utama bot Telegram
+├── app.py                 # Entry point aplikasi web backend
 ├── knowledge_base.py      # Basis pengetahuan (kata kunci & solusi)
 ├── inference_engine.py    # Mesin inferensi (keyword matching & scoring)
+├── reminder_scheduler.py  # Scheduler pengingat deadline
+├── task_manager.py        # CRUD tugas dan logika deadline
 ├── requirements.txt       # Daftar dependency Python
+├── tasks.json             # Data tugas pengguna (jika sudah dibuat)
 └── README.md              # Dokumentasi ini
 ```
 
 ## ⚙️ Cara Instalasi & Menjalankan
 
-### 1. Buat Bot Telegram
+1. Pastikan berada di folder proyek:
 
-1. Buka aplikasi **Telegram**, cari **@BotFather**.
-2. Kirim perintah `/newbot`.
-3. Ikuti instruksi untuk memberi nama bot.
-4. Anda akan mendapatkan **Token API** (contoh: `123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11`).
+```bash
+cd "d:\kuliah\semester 6\SP\Chat Bot\EduCare-Bot"
+```
 
-### 2. Install Dependencies
+2. Install dependency:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Masukkan Token
-
-Buka file `bot.py`, lalu ganti baris berikut dengan token Anda:
-
-```python
-TOKEN = "MASUKKAN_TOKEN_BOT_ANDA_DISINI"
-```
-
-### 4. Jalankan Bot
+3. Jalankan backend:
 
 ```bash
-python bot.py
+python app.py
 ```
 
-Bot akan menampilkan pesan:
-```
-=======================================================
-  🤖 Bot Sistem Pakar Kesulitan Belajar — AKTIF!
-  Tekan Ctrl+C untuk menghentikan bot.
-=======================================================
-```
+4. Buka browser atau client yang terhubung ke API untuk menggunakan aplikasi.
 
-### 5. Uji Bot
+## � Alur Kerja Aplikasi
 
-1. Buka Telegram, cari nama bot Anda.
-2. Kirim perintah `/start`.
-3. Ceritakan masalah belajar Anda, contoh:
+1. User mengirim pesan atau permintaan melalui antarmuka web/API
+2. `app.py` memproses input dan mengelola status pengguna
+3. `inference_engine.py` melakukan diagnosa keyword matching
+4. `task_manager.py` menyimpan dan membaca tugas dari `tasks.json`
+5. `reminder_scheduler.py` memeriksa deadline dan menghasilkan notifikasi
 
-   > "Aku akhir-akhir ini males banget, tugas numpuk semua tapi aku cuma rebahan main hp terus. Udah gak fokus dan capek banget rasanya."
 
-4. Bot akan memberikan **diagnosis** dan **solusi** secara otomatis!
+1. User mengirim pesan atau permintaan melalui antarmuka web/API
+2. `app.py` memproses input dan mengelola status pengguna
+3. `inference_engine.py` melakukan diagnosa keyword matching
+4. `task_manager.py` menyimpan dan membaca tugas dari `tasks.json`
+5. `reminder_scheduler.py` memeriksa deadline dan menghasilkan notifikasi
 
-## 🧠 Alur Sistem
+## 📌 Catatan Tambahan
 
-```
-User mengirim /start
-        ↓
-Bot menyapa & memberi instruksi
-        ↓
-User menceritakan masalahnya (teks bebas)
-        ↓
-Teks diubah ke lowercase & dibersihkan
-        ↓
-Keyword Matching: cek setiap kata kunci di Knowledge Base
-        ↓
-Hitung skor tiap kategori (bobot utama: +3, pendukung: +1)
-        ↓
-Kategori skor tertinggi = Diagnosis
-        ↓
-Bot mengirim solusi + detail skor
-```
+- Jika `tasks.json` belum ada, aplikasi akan membuatnya saat tugas pertama ditambahkan.
+- Kalau ingin memodifikasi logika diagnosa, periksa `inference_engine.py` dan `knowledge_base.py`.
 
 ## 📝 Lisensi
 
